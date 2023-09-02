@@ -1,0 +1,162 @@
+.body{
+    height: 1000px;
+    width: 1000px;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container{
+    /* border: 1px solid red; */
+    height: 600px;
+    width: 600px;
+}
+
+.satir1,
+.satir2,
+.satir3{
+    display:flex;
+    height: 200px;
+    width: 600px;
+    border-style: hidden;
+    /* border-style: solid solid solid solid; */
+
+}
+
+
+.satir1 div, 
+.satir2 div,
+.satir3 div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    /* border:1px solid red; */
+
+}
+
+.kare1,
+.kare2,
+.kare4,
+.kare5{
+    border:3px solid blue;
+    border-style: hidden solid solid hidden;
+}
+.kare3,
+.kare6{
+    border:3px solid blue;
+    border-style: hidden hidden solid hidden;
+}
+
+
+.kare7,
+.kare8{
+    border:3px solid blue;
+    border-style: hidden solid hidden hidden;
+}
+
+.yenile{
+    border:1px solid red;
+    width: 175px;
+    height: 75px;
+    position: relative;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:xx-large;
+    bottom: -400px;
+    right: 400px;
+ }
+
+ .yenile:hover{
+    box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
+ }
+
+ /* .winner {
+    background-color: blue;
+    border: 1px solid red;
+    height: 400px;
+    width: 400px;
+    position: absolute;
+    z-index: -100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    left: 1000px;
+ } */
+
+.cizgiContainer{
+    height: 600px;
+    width: 600px;
+    /* border: 10px solid black; */
+    position:absolute;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: -1000;
+    left: 110px;
+    }
+
+ .cizgi012,
+ .cizgi345,
+ .cizgi678,
+ .cizgi036,
+ .cizgi147,
+ .cizgi258,
+ .cizgi048,
+ .cizgi246{
+    border-radius: 10px;
+    /* border: 1px solid red; */
+    height: 10px;
+    width: 600px;
+    position: relative;
+    background-color: rgb(149, 95, 160);
+    visibility: hidden;
+    /* z-index: -100; */
+}
+.cizgi012{
+    top:-150px;
+}
+
+.cizgi345{
+    top:30px;
+}
+
+.cizgi678{
+    bottom:-225px;
+}
+
+.cizgi036{
+    right:200px;
+    top:10px;
+    transform: rotate(90deg);
+}
+
+.cizgi147{
+    transform: rotate(90deg);
+}
+
+.cizgi258{
+    left:200px;
+    bottom:15px;
+    transform: rotate(90deg);
+}
+
+.cizgi048{
+
+    bottom:30px;
+    transform: rotate(45deg);
+}
+.cizgi246{
+    bottom:40px;
+    transform: rotate(-45deg);
+}
+
+
+

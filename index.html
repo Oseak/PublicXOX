@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+
+<html lang="en" dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <title>XOX Game</title>
+    </head>
+
+    <body class="body">
+
+        <div class="container">
+            
+            <div class="satir1">
+                <div class="kare1" onclick="clickFunc(this,1)" ></div>
+                <div class="kare2" onclick="clickFunc(this,2)" ></div>
+                <div class="kare3" onclick="clickFunc(this,3)" ></div>
+            </div>
+            <div class="satir2">
+                <div class="kare4" onclick="clickFunc(this,4)" ></div>
+                <div class="kare5" onclick="clickFunc(this,5)" ></div>
+                <div class="kare6" onclick="clickFunc(this,6)" ></div>
+
+            </div>
+
+            <div class="satir3">
+                <div class="kare7" onclick="clickFunc(this,7)" ></div>
+                <div class="kare8" onclick="clickFunc(this,8)" ></div>
+                <div class="kare9" onclick="clickFunc(this,9)" ></div>
+            </div>
+            
+        </div>
+
+        <div class="yenile">
+            <div class="button" onclick="playAgain()">Play Again</div>
+        </div>
+
+        <div class="winner"></div>
+        <!-- <script src="XOX.js"></script> -->
+        <div class="cizgiContainer">
+
+             <!-- Yatay çizgiler -->
+            <div class="cizgi012"></div>
+            <div class="cizgi345"></div>
+            <div class="cizgi678"></div>
+            <!-- Yatay çizgiler -->
+
+            <!-- Dikey çizgiler -->
+            <div class="cizgi036"></div>    
+            <div class="cizgi147"></div>  
+            <div class="cizgi258"></div>  
+            <!-- Dikey çizgiler -->
+
+            <!-- Çapraz çizgiler -->
+            <div class="cizgi048"></div> 
+            <div class="cizgi246"></div> 
+            <!-- Çapraz çizgiler -->
+
+        </div>
+       
+
+
+
+
+    </body>
+
+    <script>
+        
+var checkListOne= [
+            0,0,0,
+            0,0,0,
+            0,0,0]
+
+var checkListTwo= [
+            0,0,0,
+            0,0,0,
+            0,0,0]
+
+var selectorOne = "active"
+var selectorTwo = "passive"
+var checkList = []
+var isFinished = false
+var sayac = 1
+var winner = "None"
+var p = ["012","345","678","036","147","258","048","246"]
+
+function clickFunc(get, square){
+    square -= 1
+   
+    if ((checkListOne[square] == 1 || checkListTwo[square] == 1) && isFinished == false ){
+        window.alert("Sectiginiz kare dolu lütfen boş olan bir kare seçiniz!")
+    }
+    else{
+        drawXorO(get, square)
+    }
+     
+}
+function drawXorO(get,square){
+    if (selectorOne == "active" && isFinished == false) {
+        get.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Japanese_Map_symbol_%28Koban%29.svg" style="width: 150px; "></img>'
+        checkListOne[square] = 1;
+        setTimeout(checkGameStatus,100,checkListOne)
+    }
+    
+    else if (selectorTwo == "active" && isFinished == false) {
+        get.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Gaelic-O.svg/298px-Gaelic-O.svg.png" style="width: 150px; "></img>'
+        checkListTwo[square] = 1;
+        setTimeout(checkGameStatus,100,checkListTwo)
+    }
+}
+
+function checkGameStatus(checkList){
+    if (
+        (checkList[0] == 1 && checkList[1] == 1 && checkList[2] == 1) ||
+        (checkList[3] == 1 && checkList[4] == 1 && checkList[5] == 1) ||
+        (checkList[6] == 1 && checkList[7] == 1 && checkList[8] == 1) ||
+        (checkList[0] == 1 && checkList[3] == 1 && checkList[6] == 1) ||
+        (checkList[1] == 1 && checkList[4] == 1 && checkList[7] == 1) ||
+        (checkList[2] == 1 && checkList[5] == 1 && checkList[8] == 1) ||
+        (checkList[0] == 1 && checkList[4] == 1 && checkList[8] == 1) ||
+        (checkList[2] == 1 && checkList[4] == 1 && checkList[6] == 1) ){
+            if (selectorOne == "active") {
+                isFinished = true
+                winner = "X"
+                drawLine(checkList)
+                setTimeout(window.alert,100,"Player 1 kisisi oyunu kazandı.")
+                // setTimeout(showWinner,100)
+
+            }
+            else if (selectorTwo == "active") {
+                isFinished = true
+                winner = "O"
+                drawLine(checkList)
+                setTimeout(window.alert,100,"Player 2 kisisi oyunu kazandı.")
+                // setTimeout(showWinner,100)
+
+            }
+    }
+
+    else if (sayac == 9 && isFinished == false ){
+        isFinished = true
+        setTimeout(window.alert,100,"Oyun berabere bitti.")
+    }
+
+    else {
+        if (selectorOne == "active"){
+            console.log("selectorOne signed")
+            selectorOne = "passive"
+            selectorTwo = "active"
+            sayac +=1
+        }
+        else {
+            console.log("selectorTwo signed")
+            selectorOne = "active"
+            selectorTwo = "passive"
+            sayac +=1
+        }
+    }
+}
+
+
+// function showWinner(){
+//     if (winner == "X") {
+//         document.getElementsByClassName("winner")[0].style.zIndex = 100
+//         document.getElementsByClassName("winner")[0].style.visibility = "visible"
+//         document.getElementsByClassName("winner")[0]
+//         .innerHTML = '<img src="X.png" style="width: 350px; "></img>'
+//     }
+//     else {
+//         document.getElementsByClassName("winner")[0].style.zIndex = 100
+//         document.getElementsByClassName("winner")[0].style.visibility = "visible"
+//         document.getElementsByClassName("winner")[0]
+//         .innerHTML = '<img src="O.png" style="width: 350px; "></img>'
+//     }
+// }
+
+function drawLine(cheklistDrawLine){
+    let selectedSqaures= []
+    let cizgiCekme = "cizgi"
+    let check = false
+
+    for (let i = 0 ; i<9; i++){
+        if (cheklistDrawLine[i] == 1)
+        selectedSqaures.push(i)
+    }
+
+    if (selectedSqaures.length == 3){
+        cizgiCekme += selectedSqaures.join("")
+    }
+
+    else{
+        // console.log("Full",selectedSqaures.length)
+        for (let i = 0 ; i < selectedSqaures.length; i++){
+            if (check == true)
+                break
+            let temp = (selectedSqaures.slice())
+            temp.splice(i,1)
+            console.log("Deneme",temp)
+            let temp2 = temp.slice()
+            for (let k = 0 ; k < 4; k++){
+                let temp2 = temp.slice()
+                temp2.splice(k,1)
+                // console.log("temp",temp2.join(""))
+                if (p.includes(temp2.join(""))){
+                    cizgiCekme += temp2.join("")
+                    check = true
+                    break
+        }
+    }
+     }
+    }
+    // console.log("cizgi",cizgiS)
+    document.getElementsByClassName("cizgiContainer")[0].style.zIndex = 1000;
+    document.getElementsByClassName(cizgiCekme)[0].style.visibility ="visible";
+
+}
+
+const playAgain = () => location.reload()
+    </script>
+
+
+    <style>
+        .body{
+        height: 1000px;
+        width: 1000px;
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+
+        .container{
+            /* border: 1px solid red; */
+            height: 600px;
+            width: 600px;
+        }
+
+        .satir1,
+        .satir2,
+        .satir3{
+            display:flex;
+            height: 200px;
+            width: 600px;
+            border-style: hidden;
+            /* border-style: solid solid solid solid; */
+
+        }
+
+
+        .satir1 div, 
+        .satir2 div,
+        .satir3 div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            width: 200px;
+            /* border:1px solid red; */
+
+        }
+
+        .kare1,
+        .kare2,
+        .kare4,
+        .kare5{
+            border:3px solid blue;
+            border-style: hidden solid solid hidden;
+        }
+        .kare3,
+        .kare6{
+            border:3px solid blue;
+            border-style: hidden hidden solid hidden;
+        }
+
+
+        .kare7,
+        .kare8{
+            border:3px solid blue;
+            border-style: hidden solid hidden hidden;
+        }
+
+        .yenile{
+            border:1px solid red;
+            width: 175px;
+            height: 75px;
+            position: relative;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size:xx-large;
+            bottom: -400px;
+            right: 400px;
+        }
+
+        .yenile:hover{
+            box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
+        }
+
+        /* .winner {
+            background-color: blue;
+            border: 1px solid red;
+            height: 400px;
+            width: 400px;
+            position: absolute;
+            z-index: -100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            left: 1000px;
+        } */
+
+        .cizgiContainer{
+            height: 600px;
+            width: 600px;
+            /* border: 10px solid black; */
+            position:absolute;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: -1000;
+            left: 110px;
+            }
+
+        .cizgi012,
+        .cizgi345,
+        .cizgi678,
+        .cizgi036,
+        .cizgi147,
+        .cizgi258,
+        .cizgi048,
+        .cizgi246{
+            border-radius: 10px;
+            /* border: 1px solid red; */
+            height: 10px;
+            width: 600px;
+            position: relative;
+            background-color: rgb(149, 95, 160);
+            visibility: hidden;
+            /* z-index: -100; */
+        }
+        .cizgi012{
+            top:-150px;
+        }
+
+        .cizgi345{
+            top:30px;
+        }
+
+        .cizgi678{
+            bottom:-225px;
+        }
+
+        .cizgi036{
+            right:200px;
+            top:10px;
+            transform: rotate(90deg);
+        }
+
+        .cizgi147{
+            transform: rotate(90deg);
+        }
+
+        .cizgi258{
+            left:200px;
+            bottom:15px;
+            transform: rotate(90deg);
+        }
+
+        .cizgi048{
+
+            bottom:30px;
+            transform: rotate(45deg);
+        }
+        .cizgi246{
+            bottom:40px;
+            transform: rotate(-45deg);
+        }
+
+
+
+
+    </style>
+
+
+</html>
